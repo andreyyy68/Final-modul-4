@@ -9,7 +9,7 @@ from utils.data_generator import DataGenerator
 from api.api_manager import ApiManager
 faker = Faker()
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
 def test_user():
     """
     Генерация случайного пользователя для тестов.
@@ -45,23 +45,20 @@ def test_movie():
         "genreId": random_genre_id,
     }
 
-@pytest.fixture(scope="session")
-def registered_user(requester, test_user):
+@pytest.fixture(scope='function')
+def registered_user(api_manager_user, test_user):
     """
     Фикстура для регистрации и получения данных зарегистрированного пользователя.
     """
-    response = requester.send_request(
-        method="POST",
-        endpoint=REGISTER_ENDPOINT,
-        data=test_user,
-        expected_status=201
-    )
-    response_data = response.json()
-    registered_user = test_user.copy()
-    registered_user["email"] = response_data.get("email", test_user["email"])
-    registered_user["password"] = test_user["password"]
-    registered_user["id"] = response_data["id"]
-    return registered_user
+    response = api_manager_user.auth_api.register_user(test_user, expected_status=201)
+
+    response_js = response.json()
+
+    return{
+        "email": response_js.get("email", test_user["email"]),
+        "password": test_user["password"],
+        "id": response_js["id"]
+    }
 
 @pytest.fixture(scope="session")
 def requester():

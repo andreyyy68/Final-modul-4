@@ -16,8 +16,8 @@ class TestNegativeApi:
             'password' : test_user['password']
         }
         #Проверка на не валидный пароль
-        auth_user = api_manager_user.auth_api.login_user(data_invalid_password, expected_status=500)
-        assert auth_user.status_code == 500, 'Авторизация с не валидным паролем'
+        auth_user = api_manager_user.auth_api.login_user(data_invalid_password, expected_status=401)
+        assert auth_user.status_code == 401, 'Авторизация с не валидным паролем'
         print(f'Ошибка: {auth_user.text}')
 
         #Проверка на не валидный email
