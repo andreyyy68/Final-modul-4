@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"Этот тест проверяет корректное появление и удаление созданного фильма в БД","931","test_create_delete_movie","tests.api","Tue Jun 03 10:04:49 MSK 2025","passed","Tue Jun 03 10:04:50 MSK 2025","","test_other","",""

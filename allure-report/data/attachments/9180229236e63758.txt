@@ -1,0 +1,29 @@
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:57 [32mpytest tests/api/test_other.py::test_create_delete_movie (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.3' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: */*' \
+-H 'Connection: keep-alive' \
+-H 'Content-Length: 53' \
+-H 'Content-Type: application/json' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}'
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:57 [32mpytest tests/api/test_other.py::test_create_delete_movie[0m
+curl -X POST 'https://api.dev-cinescope.coconutqa.ru/movies' \
+-H 'User-Agent: python-requests/2.32.3' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzQ4OTM0MzI3LCJleHAiOjE3NDg5MzYxMjd9.HoRl2FxwB776VvSKm79Mjnt2edjmr8WS8GyR-OlPldg' \
+-H 'Content-Length: 257' \
+-d '{"name": "Test MovieLw1DCC9xFD", "price": 500, "description": "\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u0435\u0441\u0442\u043e\u0432\u043e\u0433\u043e \u0444\u0438\u043b\u044c\u043c\u0430", "location": "MSK", "published": true, "genreId": 3}' 
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:57 [32mpytest tests/api/test_other.py::test_create_delete_movie[0m
+curl -X DELETE 'https://api.dev-cinescope.coconutqa.ru/movies/1631' \
+-H 'User-Agent: python-requests/2.32.3' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRjYzViYjFjLTZiZjctNDkyOC04ZjJmLThjZjhmZjQxZTIwMCIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzQ4OTM0MzI3LCJleHAiOjE3NDg5MzYxMjd9.HoRl2FxwB776VvSKm79Mjnt2edjmr8WS8GyR-OlPldg' \
+-H 'Content-Length: 0' \
