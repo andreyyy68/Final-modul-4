@@ -1,6 +1,7 @@
 import pytest
 import requests
 
+from playwright.sync_api import sync_playwright
 from utils.data_generator import DataGenerator
 from api.api_manager import ApiManager
 from resources.user_creds import SuperAdminCreds
@@ -10,6 +11,8 @@ from models.base_models import TestUser
 from models.base_models import TestMovie
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from constans import DEFAULT_UI_TIMEOUT
+from project_root.common.tools import Tools
 
 HOST = "92.255.111.76"
 PORT = 31200
@@ -144,4 +147,45 @@ def db_session():
     db_session = SessionLocal()
     yield db_session
     db_session.close()
+
+@pytest.fixture(scope="session")
+def browser(playwright):
+    browser = playwright.chromium.launch(headless=False)
+    yield browser
+    browser.close()
+
+
+@pytest.fixture(scope="function")
+def context(browser):
+    context = browser.new_context()
+    context.tracing.start(screenshots=True, snapshots=True, sources=True)
+    context.set_default_timeout(DEFAULT_UI_TIMEOUT)
+    yield context
+    log_name = f"trace_{Tools.get_timestamp()}.zip"
+    trace_path = Tools.files_dir('playwright_trace', log_name)
+    context.tracing.stop(path=trace_path)
+    context.close()
+
+@pytest.fixture(scope="function")
+def page(context):
+    page = context.new_page()
+    yield page
+    page.close()
+
+@pytest.fixture
+def registered_user(super_admin, user_session, creation_user_data):
+    new_session = user_session()
+
+    admin_user = User(
+        creation_user_data.email,
+        creation_user_data.password,
+        list(Roles.ADMIN.value),
+        new_session
+    )
+    admin_user.api.auth_api.register_user(creation_user_data)
+    return creation_user_data
+
+
+
+
 

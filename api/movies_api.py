@@ -18,11 +18,11 @@ class MoviesAPI(CustomRequester):
             expected_status=expected_status
         )
 
-    def create_movie(self, data, expected_status=201):
+    def create_movie(self, test_movie, expected_status=201):
         return self.send_request(
             method="POST",
             endpoint="movies",
-            data=data,
+            data=test_movie,
             expected_status=expected_status,
         )
 
